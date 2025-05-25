@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí - FitControl</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .about-hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .trainer-image {
+            text-align: center;
+        }
+
+        .trainer-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fbbf24;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .trainer-intro h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+
+        .trainer-intro h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .trainer-intro p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .credentials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .credential-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border-left: 4px solid #2563eb;
+        }
+
+        .credential-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .credential-card h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .credential-card .institution {
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .credential-card .year {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .experience {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .experience-timeline {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #2563eb;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 80px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 21px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: #2563eb;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #2563eb;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-year {
+            color: #2563eb;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: #1f2937;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .philosophy-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .philosophy-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #2563eb;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .philosophy-quote::before,
+        .philosophy-quote::after {
+            content: '"';
+            font-size: 3rem;
+            color: #fbbf24;
+            position: absolute;
+        }
+
+        .philosophy-quote::before {
+            left: -30px;
+            top: -10px;
+        }
+
+        .philosophy-quote::after {
+            right: -30px;
+            bottom: -40px;
+        }
+
+        .specializations {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .specializations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .specialization-item {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .specialization-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .specialization-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stats {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .trainer-intro h1 {
+                font-size: 2.5rem;
+            }
+
+            .trainer-image img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .timeline-item {
+                padding-left: 60px;
+            }
+
+            .experience-timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item::before {
+                left: 11px;
+            }
+
+            .philosophy-quote::before,
+            .philosophy-quote::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>FitControl</h2>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="index.html#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="planes.html" class="nav-link">Planes</a></li>
+                    <li><a href="about.html" class="nav-link">Sobre Mí</a></li>
+                    <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-container">
+                <div class="trainer-image">
+                    <img src="./imagenes/Captura de pantalla 2025-05-25 011401.png" alt="Carlos Martínez - Entrenador Personal">
+                </div>
+                <div class="trainer-intro">
+                    <h1>Blai Sola</h1>
+                    <h2>Entrenador Personal Certificado & Especialista en Movimiento</h2>
+                    <p>
+                        Con más de 8 años de experiencia ayudando a personas a transformar sus vidas a través del movimiento, 
+                        mi misión es simple: enseñarte a controlar tu cuerpo para que puedas controlar tu vida. 
+                        Creo firmemente que moverse bien es conocerse bien, y que cada persona tiene el potencial 
+                        de alcanzar una versión más fuerte y móvil de sí misma.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credentials -->
+    <section class="credentials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Formación y Certificaciones</h2>
+                <p>Mi compromiso con la excelencia se refleja en mi formación continua</p>
+            </div>
+            
+            <div class="credentials-grid">
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Licenciatura en Ciencias del Deporte</h3>
+                    <div class="institution">Universidad Politécnica de Madrid</div>
+                    <div class="year">2016 - 2020</div>
+                </div>
+
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Certificación NSCA-CPT</h3>
+                    <div class="institution">National Strength & Conditioning Association</div>
+                    <div class="year">2020</div>
+                </div>
+
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Especialización en Entrenamiento Funcional</h3>
+                    <div class="institution">Functional Movement Systems</div>
+                    <div class="year">2021</div>
+                </div>
+
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Certificación en Movilidad y Flexibilidad</h3>
+                    <div class="institution">Mobility WOD</div>
+                    <div class="year">2022</div>
+                </div>
+
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>Instructor de Escalada Deportiva</h3>
+                    <div class="institution">Federación Española de Deportes de Montaña</div>
+                    <div class="year">2019</div>
+                </div>
+
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Entrenador de Running</h3>
+                    <div class="institution">Real Federación Española de Atletismo</div>
+                    <div class="year">2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2>Experiencia Profesional</h2>
+                <p>Mi trayectoria profesional en el mundo del fitness y el entrenamiento</p>
+            </div>
+            
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024 - Presente</div>
+                        <div class="timeline-title">Fundador de FitControl</div>
+                        <div class="timeline-company">Plataforma Online de Entrenamiento</div>
+                        <p>Creación de una plataforma integral de entrenamiento online que combina fuerza, movilidad y control corporal. Desarrollo de programas personalizados para más de 500 usuarios activos.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2022 - 2024</div>
+                        <div class="timeline-title">Entrenador Personal Senior</div>
+                        <div class="timeline-company">Elite Fitness Center - Madrid</div>
+                        <p>Entrenamiento personalizado para atletas de alto rendimiento y ejecutivos. Especialización en programas de fuerza funcional y preparación para competiciones de escalada.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020 - 2022</div>
+                        <div class="timeline-title">Coordinador de Programas de Movilidad</div>
+                        <div class="timeline-company">MoveFit Studio</div>
+                        <p>Desarrollo e implementación de programas grupales de movilidad y flexibilidad. Formación de otros entrenadores en técnicas de movimiento funcional.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2018 - 2020</div>
+                        <div class="timeline-title">Entrenador de Escalada</div>
+                        <div class="timeline-company">Rocódromo Vertical - Madrid</div>
+                        <p>Instrucción de escalada deportiva y boulder. Desarrollo de programas de entrenamiento específicos para escaladores de diferentes niveles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy-section">
+        <div class="container">
+            <div class="philosophy-content">
+                <h2>Mi Filosofía de Entrenamiento</h2>
+                <div class="philosophy-quote">
+                    El cuerpo humano está diseñado para moverse. Cuando recuperamos esa capacidad natural de movimiento, 
+                    no solo mejoramos físicamente, sino que ganamos confianza, claridad mental y una conexión más profunda con nosotros mismos.
+                </div>
+                <p>
+                    Mi enfoque se basa en tres pilares fundamentales: <strong>Fuerza</strong>, <strong>Movilidad</strong> y <strong>Control</strong>. 
+                    Creo que estos elementos no deben trabajarse por separado, sino como un sistema integrado que nos permite 
+                    desarrollar un cuerpo resiliente y capaz.
+                </p>
+                <p>
+                    No se trata solo de levantar más peso o ser más flexible. Se trata de entender tu cuerpo, 
+                    respetarlo y llevarlo a su máximo potencial de manera inteligente y sostenible. 
+                    Cada persona es única, y por eso cada programa debe ser único también.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specializations -->
+    <section class="specializations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Mis Especialidades</h2>
+                <p>Áreas en las que me he especializado para ofrecerte el mejor servicio</p>
+            </div>
+            
+            <div class="specializations-grid">
+                <div class="specialization-item">
+                    <div class="specialization-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Entrenamiento Funcional</h3>
+                    <p>Movimientos que mejoran tu capacidad para las actividades diarias</p>
+                </div>
+
+                <div class="specialization-item">
+                    <div class="specialization-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Movilidad y Flexibilidad</h3>
+                    <p>Recupera y mantén un rango de movimiento óptimo</p>
+                </div>
+
+                <div class="specialization-item">
+                    <div class="specialization-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>Escalada Deportiva</h3>
+                    <p>Entrenamiento específico para escaladores de todos los niveles</p>
+                </div>
+
+                <div class="specialization-item">
+                    <div class="specialization-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Preparación para Carreras</h3>
+                    <p>Planes estructurados para 10K, 21K y maratón</p>
+                </div>
+
+                <div class="specialization-item">
+                    <div class="specialization-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Rehabilitación Deportiva</h3>
+                    <p>Recuperación y prevención de lesiones</p>
+                </div>
+
+                <div class="specialization-item">
+                    <div class="specialization-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Entrenamiento Corporativo</h3>
+                    <p>Programas de bienestar para empresas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>8+</h3>
+                    <p>Años de Experiencia</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Clientes Entrenados</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Certificaciones</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Satisfacción del Cliente</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitControl</h3>
+                    <p>Transforma tu cuerpo, controla tu vida. Entrenamientos inteligentes para personas ocupadas.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#servicios">Servicios</a></li>
+                        <li><a href="planes.html">Planes</a></li>
+                        <li><a href="about.html">Sobre Mí</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="planes.html">Ganar Fuerza</a></li>
+                        <li><a href="planes.html">Ganar Movilidad</a></li>
+                        <li><a href="planes.html">Fuerza + Movilidad</a></li>
+                        <li><a href="planes.html">Asesoría 1:1</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-envelope"></i> info@fitcontrol.com</p>
+                    <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Madrid, España</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FitControl. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes de Entrenamiento - FitControl</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .plans-hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .plan-card.featured {
+            border: 2px solid #fbbf24;
+            transform: scale(1.05);
+        }
+
+        .plan-card.featured::before {
+            content: 'MÁS POPULAR';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fbbf24;
+            color: #1f2937;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .plan-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .plan-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .plan-price {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .price-period {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .price-trial {
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .plan-features li {
+            padding: 0.75rem 0;
+            color: #4b5563;
+            position: relative;
+            padding-left: 2rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .plan-levels {
+            margin: 1.5rem 0;
+        }
+
+        .plan-levels h4 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .levels {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .level-badge {
+            background: #e5e7eb;
+            color: #4b5563;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .level-badge.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .plan-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .plan-btn {
+            background: #2563eb;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .plan-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .plan-card.featured .plan-btn {
+            background: #fbbf24;
+            color: #1f2937;
+        }
+
+        .plan-card.featured .plan-btn:hover {
+            background: #f59e0b;
+        }
+
+        .running-plans {
+            background: #f8fafc;
+            padding: 4rem 0;
+        }
+
+        .running-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .running-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .running-distance {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .running-time {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .personal-training {
+            background: linear-gradient(135deg, #1f2937, #374151);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .personal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .personal-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .personal-feature {
+            text-align: center;
+        }
+
+        .personal-feature i {
+            font-size: 2rem;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>FitControl</h2>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="index.html#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="planes.html" class="nav-link">Planes</a></li>
+                    <li><a href="about.html" class="nav-link">Sobre Mí</a></li>
+                    <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Plans Hero -->
+    <section class="plans-hero">
+        <div class="container">
+            <h1>Planes de Entrenamiento</h1>
+            <p>Elige el plan perfecto para tus objetivos. Primer mes completamente gratis.</p>
+        </div>
+    </section>
+
+    <!-- Main Plans -->
+    <section class="services" style="padding: 60px 0;">
+        <div class="container">
+            <div class="plans-grid">
+                <!-- Fuerza Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3 class="plan-title">Ganar Fuerza</h3>
+                        <p class="plan-subtitle">Desarrolla fuerza funcional y potencia</p>
+                    </div>
+                    
+                    <div class="plan-price">
+                        <div class="price-amount">€19<span class="price-period">/mes</span></div>
+                        <div class="price-trial">Primer mes gratis</div>
+                    </div>
+
+                    <div class="plan-levels">
+                        <h4>Niveles disponibles:</h4>
+                        <div class="levels">
+                            <span class="level-badge active">Principiante</span>
+                            <span class="level-badge active">Intermedio</span>
+                            <span class="level-badge active">Avanzado</span>
+                        </div>
+                    </div>
+
+                    <ul class="plan-features">
+                        <li>Entrenamientos con peso corporal</li>
+                        <li>Rutinas con material extra (barras, pesas, cintas)</li>
+                        <li>Nuevas rutinas cada mes</li>
+                        <li>Progresión personalizada por nivel</li>
+                        <li>Videos explicativos detallados</li>
+                        <li>Soporte técnico incluido</li>
+                        <li>Acceso a comunidad privada</li>
+                    </ul>
+
+                    <div class="plan-cta">
+                        <a href="#" class="plan-btn">Comenzar Gratis</a>
+                    </div>
+                </div>
+
+                <!-- Movilidad Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3 class="plan-title">Ganar Movilidad</h3>
+                        <p class="plan-subtitle">Mejora flexibilidad y rango de movimiento</p>
+                    </div>
+                    
+                    <div class="plan-price">
+                        <div class="price-amount">€15<span class="price-period">/mes</span></div>
+                        <div class="price-trial">Primer mes gratis</div>
+                    </div>
+
+                    <div class="plan-levels">
+                        <h4>Niveles disponibles:</h4>
+                        <div class="levels">
+                            <span class="level-badge active">Principiante</span>
+                            <span class="level-badge active">Intermedio</span>
+                            <span class="level-badge active">Avanzado</span>
+                        </div>
+                    </div>
+
+                    <ul class="plan-features">
+                        <li>Rutinas de flexibilidad dinámica</li>
+                        <li>Ejercicios de movilidad articular</li>
+                        <li>Técnicas de liberación miofascial</li>
+                        <li>Sesiones de 15-30 minutos</li>
+                        <li>Rutinas matutinas y nocturnas</li>
+                        <li>Seguimiento de progreso</li>
+                        <li>Adaptaciones para oficinistas</li>
+                    </ul>
+
+                    <div class="plan-cta">
+                        <a href="#" class="plan-btn">Comenzar Gratis</a>
+                    </div>
+                </div>
+
+                <!-- Fuerza + Movilidad Plan (Featured) -->
+                <div class="plan-card featured">
+                    <div class="plan-header">
+                        <div class="plan-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h3 class="plan-title">Fuerza + Movilidad</h3>
+                        <p class="plan-subtitle">La combinación perfecta para control total</p>
+                    </div>
+                    
+                    <div class="plan-price">
+                        <div class="price-amount">€29<span class="price-period">/mes</span></div>
+                        <div class="price-trial">Primer mes gratis</div>
+                    </div>
+
+                    <div class="plan-levels">
+                        <h4>Niveles disponibles:</h4>
+                        <div class="levels">
+                            <span class="level-badge active">Principiante</span>
+                            <span class="level-badge active">Intermedio</span>
+                            <span class="level-badge active">Avanzado</span>
+                        </div>
+                    </div>
+
+                    <ul class="plan-features">
+                        <li>Acceso completo a planes de Fuerza y Movilidad</li>
+                        <li>Entrenamientos de escalada funcional</li>
+                        <li>Movimientos complejos y control corporal</li>
+                        <li>Rutinas combinadas únicas</li>
+                        <li>Progresiones avanzadas</li>
+                        <li>Soporte prioritario</li>
+                        <li>Descuento en asesorías 1:1</li>
+                        <li>Acceso anticipado a nuevos contenidos</li>
+                    </ul>
+
+                    <div class="plan-cta">
+                        <a href="#" class="plan-btn">Comenzar Gratis</a>
+                    </div>
+                </div>
+
+                <!-- Cardio Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3 class="plan-title">Cardio</h3>
+                        <p class="plan-subtitle">Quema calorías y mejora resistencia</p>
+                    </div>
+                    
+                    <div class="plan-price">
+                        <div class="price-amount">€17<span class="price-period">/mes</span></div>
+                        <div class="price-trial">Primer mes gratis</div>
+                    </div>
+
+                    <div class="plan-levels">
+                        <h4>Niveles disponibles:</h4>
+                        <div class="levels">
+                            <span class="level-badge active">Principiante</span>
+                            <span class="level-badge active">Intermedio</span>
+                            <span class="level-badge active">Avanzado</span>
+                        </div>
+                    </div>
+
+                    <ul class="plan-features">
+                        <li>Entrenamientos HIIT intensivos</li>
+                        <li>Cardio funcional sin equipamiento</li>
+                        <li>Sesiones de 15-45 minutos</li>
+                        <li>Rutinas de quema calórica</li>
+                        <li>Entrenamientos metabólicos</li>
+                        <li>Seguimiento de calorías quemadas</li>
+                        <li>Planes de nutrición básicos</li>
+                    </ul>
+
+                    <div class="plan-cta">
+                        <a href="#" class="plan-btn">Comenzar Gratis</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Running Plans -->
+    <section class="running-plans">
+        <div class="container">
+            <div class="section-header">
+                <h2>Planes de Running</h2>
+                <p>Alcanza tus objetivos de carrera con planes estructurados y progresivos</p>
+            </div>
+            
+            <div class="running-grid">
+                <div class="running-card">
+                    <div class="running-distance">10K</div>
+                    <div class="running-time">En menos de 50 minutos</div>
+                    <ul class="plan-features">
+                        <li>Plan de 8 semanas</li>
+                        <li>3-4 entrenamientos por semana</li>
+                        <li>Incluye técnica de carrera</li>
+                        <li>Planes de nutrición</li>
+                    </ul>
+                    <div class="plan-price">
+                        <div class="price-amount">€25<span class="price-period">/plan</span></div>
+                    </div>
+                    <a href="#" class="plan-btn">Comprar Plan</a>
+                </div>
+
+                <div class="running-card">
+                    <div class="running-distance">21K</div>
+                    <div class="running-time">En menos de 2h30</div>
+                    <ul class="plan-features">
+                        <li>Plan de 12 semanas</li>
+                        <li>4-5 entrenamientos por semana</li>
+                        <li>Incluye entrenamiento de fuerza</li>
+                        <li>Estrategias de carrera</li>
+                    </ul>
+                    <div class="plan-price">
+                        <div class="price-amount">€45<span class="price-period">/plan</span></div>
+                    </div>
+                    <a href="#" class="plan-btn">Comprar Plan</a>
+                </div>
+
+                <div class="running-card">
+                    <div class="running-distance">42K</div>
+                    <div class="running-time">En menos de 4h</div>
+                    <ul class="plan-features">
+                        <li>Plan de 16 semanas</li>
+                        <li>5-6 entrenamientos por semana</li>
+                        <li>Periodización avanzada</li>
+                        <li>Soporte nutricional completo</li>
+                    </ul>
+                    <div class="plan-price">
+                        <div class="price-amount">€75<span class="price-period">/plan</span></div>
+                    </div>
+                    <a href="#" class="plan-btn">Comprar Plan</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: #6b7280; margin-bottom: 1rem;">¿Quieres mejorar tus tiempos? Los planes personalizados incluyen entrenamiento de fuerza específico.</p>
+                <a href="#personal-training" class="btn btn-primary">Solicitar Plan Personalizado</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Training -->
+    <section id="personal-training" class="personal-training">
+        <div class="container">
+            <div class="personal-content">
+                <h2>Asesoría Personal 1:1</h2>
+                <p>Entrenamiento completamente personalizado adaptado a tus objetivos, horarios y necesidades específicas.</p>
+                
+                <div class="personal-features">
+                    <div class="personal-feature">
+                        <i class="fas fa-user-check"></i>
+                        <h3>Evaluación Inicial</h3>
+                        <p>Análisis completo de tu condición física, objetivos y limitaciones</p>
+                    </div>
+                    <div class="personal-feature">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Plan Personalizado</h3>
+                        <p>Rutinas diseñadas específicamente para ti y tu estilo de vida</p>
+                    </div>
+                    <div class="personal-feature">
+                        <i class="fas fa-video"></i>
+                        <h3>Sesiones Online/Presencial</h3>
+                        <p>Flexibilidad total según tu ubicación y preferencias</p>
+                    </div>
+                    <div class="personal-feature">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Seguimiento Continuo</h3>
+                        <p>Ajustes constantes y monitoreo de tu progreso</p>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3 style="text-align: center; margin-bottom: 2rem; color: #1f2937;">Solicita tu Consulta Gratuita</h3>
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nombre completo</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Ubicación</label>
+                                <input type="text" id="location" name="location" placeholder="Ciudad, País">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="goal">Objetivo principal</label>
+                            <select id="goal" name="goal" required>
+                                <option value="">Selecciona tu objetivo</option>
+                                <option value="fuerza">Ganar fuerza</option>
+                                <option value="movilidad">Mejorar movilidad</option>
+                                <option value="cardio">Mejorar resistencia</option>
+                                <option value="running">Objetivos de running</option>
+                                <option value="general">Fitness general</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Nivel de experiencia</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Selecciona tu nivel</option>
+                                <option value="principiante">Principiante</option>
+                                <option value="intermedio">Intermedio</option>
+                                <option value="avanzado">Avanzado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Cuéntanos más sobre tus objetivos</label>
+                            <textarea id="message" name="message" placeholder="Describe tus objetivos, experiencia previa, limitaciones, etc."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; background: #fbbf24; color: #1f2937;">
+                            Solicitar Consulta Gratuita
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FitControl</h3>
+                    <p>Transforma tu cuerpo, controla tu vida. Entrenamientos inteligentes para personas ocupadas.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#servicios">Servicios</a></li>
+                        <li><a href="planes.html">Planes</a></li>
+                        <li><a href="about.html">Sobre Mí</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Planes</h4>
+                    <ul>
+                        <li><a href="#fuerza">Ganar Fuerza</a></li>
+                        <li><a href="#movilidad">Ganar Movilidad</a></li>
+                        <li><a href="#combinado">Fuerza + Movilidad</a></li>
+                        <li><a href="#personal-training">Asesoría 1:1</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-envelope"></i> info@fitcontrol.com</p>
+                    <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Madrid, España</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FitControl. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
